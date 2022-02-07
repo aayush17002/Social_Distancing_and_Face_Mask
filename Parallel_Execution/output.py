@@ -12,8 +12,8 @@ def connections():
 	input_conn.bind((socket.gethostname(),PORT1))
 	input_conn.listen(5)
 	print('Socket now listening')
-
     return server_conn, input_conn
+
 
 server_conn, input_conn = connections()
 
