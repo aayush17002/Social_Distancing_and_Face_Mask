@@ -28,11 +28,11 @@ def create_server():
 	PORT2 = 8450
 	#Connect ot the final output
 	output_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	output_conn.connect((socket.gethostname(), PORT2))
+	output_conn.connect(("192.168.20.238", PORT2))
 	print('Server is now connected to output')
 	#Bind the server
 	server_conn=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-	server_conn.bind((socket.gethostname(),PORT1))
+	server_conn.bind(("192.168.1.170",PORT1))
 	server_conn.listen(5)
 	print('Server is now listening to input')
 	return server_conn, output_conn
