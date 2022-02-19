@@ -11,9 +11,11 @@ def connections():
     #Connect ot the server
     server_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_conn.connect((socket.gethostname(), PORT1))
+    print("Input is now connected to server")
     #Connect ot the final output
     output_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     output_conn.connect((socket.gethostname(), PORT2))
+    print("Input is now connected to output")
 
     return server_conn, output_conn
 
@@ -42,6 +44,7 @@ def send_data_server(frame, server_conn, HEADERSIZE):
     data = pickle.dumps(frame)
     msg = bytes(f"{len(data):<{HEADERSIZE}}", 'utf-8')+data
     server_conn.send(msg)
+    return len(data)
 
 def send_social_distancing(frame, classes, net, outNames, output_conn, CONF_THRESHOLD, NMS_THRESHOLD):
     blob = cv2.dnn.blobFromImage(frame, 1 / 255.0, (416, 416), swapRB=True, crop=False)
@@ -67,18 +70,18 @@ server_conn, output_conn = connections()
 capture, step = video_initialization()
 
 while(cap.isOpened()):
-    ret, frame = cap.read()
+    ret, frame = capture.read()
 
     if not ret:
         break;
     
     if count%step==0:
-        send_data_server(frame, server_conn, HEADERSIZE)
+        size = send_data_server(frame, server_conn, HEADERSIZE)
         print("{}: {}".format(img_counter, size))
         send_social_distancing(frame, classes, net, outNames, output_conn, CONF_THRESHOLD, NMS_THRESHOLD)
         img_counter += 1    
 
     count+=1
 
-cap.release()
+capture.release()
 cv2.destroyAllWindows()
