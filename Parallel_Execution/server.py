@@ -34,7 +34,7 @@ def create_server():
 	server_conn=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	server_conn.bind((socket.gethostname(),PORT1))
 	server_conn.listen(5)
-	print('Server is now connected to input')
+	print('Server is now listening to input')
 	return server_conn, output_conn
 
 def get_message(sock):
@@ -162,7 +162,7 @@ print("now starting")
 
 server_conn, output_conn = create_server()
 conn,addr=server_conn.accept()
-print('Connected by', addr)
+print('Connected to input by', addr)
 
 while True:	
 	img, outs = get_image_pred(conn,net,output_layers)
