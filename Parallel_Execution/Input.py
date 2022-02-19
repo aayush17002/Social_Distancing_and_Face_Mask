@@ -10,11 +10,11 @@ def connections():
     PORT2 = 8400
     #Connect ot the server
     server_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_conn.connect((socket.gethostname(), PORT1))
+    server_conn.connect(('192.168.1.170', PORT1))
     print("Input is now connected to server")
     #Connect ot the final output
     output_conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    output_conn.connect((socket.gethostname(), PORT2))
+    output_conn.connect(('192.168.20.238', PORT2))
     print("Input is now connected to output")
 
     return server_conn, output_conn
