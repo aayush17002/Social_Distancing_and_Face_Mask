@@ -5,23 +5,24 @@ def connections():
     PORT2 = 8450
     #Bind the server
 	server_conn=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-	server_conn.bind((socket.gethostname(),PORT2))
+	server_conn.bind(('192.168.20.238',PORT2))
 	server_conn.listen(5)
+	print("Output now connected to server")
     #Bind the server
 	input_conn=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-	input_conn.bind((socket.gethostname(),PORT1))
+	input_conn.bind(('192.168.20.238',PORT1))
 	input_conn.listen(5)
-	print('Socket now listening')
+	print('Output now connected to input')
     return server_conn, input_conn
 
 
 server_conn, input_conn = connections()
 
 conn_server,addr=server_conn.accept()
-print('Connected by', addr)
+print('Connected to server by', addr)
 
-conn_input,addr=server_conn.accept()
-print('Connected by', addr)
+conn_input,addr=input_conn.accept()
+print('Connected to input by', addr)
 
 while True:
 	result_server = ""
