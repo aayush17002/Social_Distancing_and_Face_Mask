@@ -1,19 +1,19 @@
 import socket
 
 def connections():
-    PORT1 = 8400
-    PORT2 = 8450
-    #Bind the server
+	PORT1 = 8400
+	PORT2 = 8450
+	#Bind the server
 	server_conn=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	server_conn.bind(('192.168.20.238',PORT2))
 	server_conn.listen(5)
 	print("Output now connected to server")
-    #Bind the server
+	#Bind the server
 	input_conn=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	input_conn.bind(('192.168.20.238',PORT1))
 	input_conn.listen(5)
 	print('Output now connected to input')
-    return server_conn, input_conn
+	return server_conn, input_conn
 
 
 server_conn, input_conn = connections()
