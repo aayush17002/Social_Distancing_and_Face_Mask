@@ -69,7 +69,7 @@ classes, net, outNames = load_model()
 server_conn, output_conn = connections()
 capture, step = video_initialization()
 
-while(cap.isOpened()):
+while(capture.isOpened()):
     ret, frame = capture.read()
 
     if not ret:
